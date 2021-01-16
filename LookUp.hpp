@@ -15,12 +15,11 @@ class LookUp {
 private:
     float output;
     float key1;
-    float key2;
+
 public:
-    LookUp(float val1, float val2){
+    LookUp(float val1){
         output = 0;
         key1 = val1;
-        key2 = val2;
     }
     ~LookUp(){};
     

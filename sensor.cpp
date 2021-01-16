@@ -19,13 +19,10 @@ float getRPM(){
       
 }
 
-float getThrottle(){
-    float throttle;
-    cout << "enter Throttle: " << endl;
-    cin >> throttle;
-    return throttle;
+float getSheath(){
+    float sheath;
+    cout << "enter sheath: " << endl;
+    cin >> sheath;
+    return sheath;
 }
 
-float getTorque(){
-  return 1209.6;
-}
