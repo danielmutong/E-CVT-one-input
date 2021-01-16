@@ -22,11 +22,11 @@ int main(void){
     int rpm = 0;
     int measured_sheath = 0;
     int ideal_sheath = 0;
-    /*
+    
     while(rpm < 2000){
         rpm = getRPM();
     }
-     */
+     
     while(rpm < 3550){
         rpm = getRPM();
         LookUp a(rpm);
