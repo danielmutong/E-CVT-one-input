@@ -22,22 +22,36 @@ int main(void){
     int rpm = 0;
     int measured_sheath = 0;
     int ideal_sheath = 0;
+    int throttle = 0;
     
-    while(rpm < 2000){
-        rpm = getRPM();
-    }
-     
+ 
     while(rpm < 3550){
-        rpm = getRPM();
+      rpm = getRPM();
+      throttle = getThrottle();
+      if(throttle == 100){
         LookUp a(rpm);
         ideal_sheath = a.findkey();
         measured_sheath = getSheath();
         test.pid_task(ideal_sheath, measured_sheath);
+      }
+      
         
     }
     while(1){
         rpm = getRPM();
-        test.pid_task(3600, rpm);
+        throttle = getThrottle();
+        if(throttle == 100 && (rpm) > 3550){
+          cout << "linear shift" << endl;
+          motor(100);
+        }
+        else if( (rpm < 3550 && throttle == 0) ){
+          test.pid_task(3600, rpm);
+        }
+        else if(throttle == 0){
+          cout << "down shift " << endl;
+          motor(-100);
+        }
+        
     }
 
     

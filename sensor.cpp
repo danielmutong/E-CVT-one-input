@@ -26,3 +26,9 @@ float getSheath(){
     return sheath;
 }
 
+float getThrottle(){
+  int throttle;
+  cout << "enter throttle: " << endl;
+  cin >> throttle;
+  return throttle;
+}
