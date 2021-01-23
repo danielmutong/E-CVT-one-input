@@ -16,6 +16,7 @@ using namespace std;
 void motor(float output);
 float getRPM();
 float getSheath();
+int getThrottle();
 
 
 

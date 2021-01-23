@@ -29,7 +29,7 @@ public:
     
     pid(){};
     
-    void pid_task(float desired_value, float actual_value);
+    int pid_task(float desired_value, float actual_value);
 
 };
 #endif /* pid_hpp */

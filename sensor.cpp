@@ -8,6 +8,7 @@
 #include "sensor.hpp"
 void motor(float output){
     cout << "motor running" << output << endl;
+    
 }
 
 
@@ -26,7 +27,7 @@ float getSheath(){
     return sheath;
 }
 
-float getThrottle(){
+int getThrottle(){
   int throttle;
   cout << "enter throttle: " << endl;
   cin >> throttle;

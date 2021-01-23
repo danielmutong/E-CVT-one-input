@@ -18,44 +18,57 @@ using namespace std;
 
 
 int main(void){
-    pid test;
-    int rpm = 0;
-    int measured_sheath = 0;
-    int ideal_sheath = 0;
-    int throttle = 0;
-    
+  pid test;
+  int rpm = 0;
+  int measured_sheath = 0;
+  int ideal_sheath = 0;
+  int throttle = 0;
+  float sheath = 0;
  
-    while(rpm < 3550){
-      rpm = getRPM();
-      throttle = getThrottle();
-      if(throttle == 100){
-        LookUp a(rpm);
-        ideal_sheath = a.findkey();
-        measured_sheath = getSheath();
-        test.pid_task(ideal_sheath, measured_sheath);
-      }
+  while(rpm < 3550){
+    rpm = getRPM();
+    throttle = getThrottle();
+    if(throttle == 100){
+      LookUp a(rpm);
+      ideal_sheath = a.findkey();
+      measured_sheath = getSheath();
+      int x = test.pid_task(ideal_sheath, measured_sheath);
+      sheath = measured_sheath + x;
+      cout << "new sheath is: " << sheath << endl;
+    }
       
         
+  }
+  sheath = 18;
+  while(1){
+    rpm = getRPM();
+    throttle = getThrottle();
+    if(throttle == 100 && (rpm) > 3550){
+
+      cout << "up shift" << endl;
+      motor(100);
+      sheath = sheath -  0.1;
+      cout << "new sheath is: " << sheath << endl;
+      
     }
-    while(1){
-        rpm = getRPM();
-        throttle = getThrottle();
-        if(throttle == 100 && (rpm) > 3550){
-          cout << "linear shift" << endl;
-          motor(100);
-        }
-        else if( (rpm < 3550 && throttle == 0) ){
-          test.pid_task(3600, rpm);
-        }
-        else if(throttle == 0){
-          cout << "down shift " << endl;
-          motor(-100);
-        }
+    else if( (rpm < 3550 && throttle == 100) ){
+      int x = test.pid_task(3600, rpm);
+      sheath = sheath + x * 0.01; 
+      cout << "new sheath is: " << sheath << endl;
+
+    }
+    else if(throttle == 0){
+
+      cout << "down shift " << endl;
+      motor(-100);
+      sheath = sheath + 0.1;
+      cout << "new sheath is: " << sheath << endl;
+    }
         
-    }
+  }
 
     
-    return 0;
+  return 0;
     
 }
 
