@@ -7,7 +7,7 @@
 //
 #include "sensor.hpp"
 void motor(float output){
-    cout << "motor running" << output << endl;
+    cout << "motor running: " << output << endl;
     
 }
 

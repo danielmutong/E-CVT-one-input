@@ -17,13 +17,10 @@ private:
     float key1;
 
 public:
-    LookUp(float val1){
-        output = 0;
-        key1 = val1;
-    }
+    LookUp(){}
     ~LookUp(){};
     
-    int findkey();
+    int findkey(float key);
 };
 
 #endif /* LookUp_hpp */

@@ -9,9 +9,10 @@
 #include "LookUp.hpp"
 #include "Table.h"
 #include <iostream>
+#define SIZE_OF_MAP 39
 using namespace std;
 
-map mymap[39] = {
+map mymap[SIZE_OF_MAP] = {
                  {0,80},
                  {500,70},
                  {1000,60},
@@ -51,34 +52,27 @@ map mymap[39] = {
                  {3600,18}
 };
 
-int LookUp::findkey(){
+int LookUp::findkey(float key){
     int i = 0;
-    int temp1;
+    int output;
     //finding key1
-    for(i = 0; i < 33; i++){
-        if(key1 <= mymap[i].rpm)
+    for(i = 0; i < SIZE_OF_MAP; i++){
+        if(key <= mymap[i].rpm)
             break;
     }
     
-    if(key1 == mymap[i].rpm)
-           temp1 = key1;
+    if(key == mymap[i].rpm)
+           output = mymap[i].sheath;
     else{
     //comparing lower and upper bounds for key1
    
-        if((key1 - mymap[i-1].rpm) > (mymap[i].rpm - key1))
-            temp1 = mymap[i].rpm;
+        if((key - mymap[i-1].rpm) > (mymap[i].rpm - key1))
+            output = mymap[i].sheath;
     
         else
-            temp1 = mymap[i-1].rpm;
+            output = mymap[i-1].sheath;
     }
-    
-    //finding final output based on key1 and key2
-    for(i = 0; i < 33; i++){
-        if(mymap[i].rpm == temp1){
-            output = mymap[i].sheath;
-            break;
-        }
-    }
-    cout << output <<endl;
+
+    cout << output << endl;
     return output;
 }
