@@ -73,6 +73,5 @@ int LookUp::findkey(float key){
             output = mymap[i-1].sheath;
     }
 
-    cout << output << endl;
     return output;
 }

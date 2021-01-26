@@ -14,20 +14,25 @@
 
 class pid{
 private:
-    float KP = 1;
-    float KI = 0;
-    float KD = 0;
-    int error_prior = 0;
-    int integral_prior = 0;
-    int bias = 0;
-    int iteration_time = 500;
-    float error = 0;
-    float integral = 0;
-    float derivative = 0;
-    float output = 0;
+    float KP;
+    float KI;
+    float KD;
+    int error_prior;
+    int integral_prior;
+    int bias;
+    int iteration_time;
+    float error;
+    float integral;
+    float derivative;
+    float output;
 public:
     
-    pid(){};
+    pid(){
+        KP = 1;
+        KI = 0;
+        KD = 0;
+        error_prior = 0; integral_prior = 0; bias = 0; iteration_time = 500; error = 0; integral = 0; derivative = 0; output = 0;
+    };
     
     int pid_task(float desired_value, float actual_value);
 
