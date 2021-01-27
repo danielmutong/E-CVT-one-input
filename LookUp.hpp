@@ -20,6 +20,9 @@ public:
     LookUp(){}
     ~LookUp(){};
     
+    /*
+     This method finds and returns the value associated with the key in a map
+     */
     int findkey(float key);
 };
 

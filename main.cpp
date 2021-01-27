@@ -9,13 +9,11 @@
 #include <iostream>
 #include "LookUp.hpp"
 #include "pid.hpp"
-#define ROWS 21
-#define COLS 7
-#define MIN_KEY1 1999
-#define MAX_KEY2 3601
-#define MIN_SHEATH 15
-#define MAX_SHEATH 80
-#define SHIFT_DISPLACEMENT 0.1
+
+
+#define MIN_SHEATH 15 // minimum sheath position before limit switch
+#define MAX_SHEATH 80 // starting sheath position
+#define SHIFT_DISPLACEMENT 0.1 
 using namespace std;
 
 
@@ -35,28 +33,27 @@ int main(void){
         throttle = getThrottle();
         //if full throttle
         if(throttle == 100){
-            //using map to find transient
+            //using map to find the optimal sheath given a pid in the transient phase
             ideal_sheath = a.findkey(rpm);
             measured_sheath = getSheath();
             cout << "ideal sheath: " << ideal_sheath << " measured sheath:  " << measured_sheath << endl;
-            //moving sheath based on pid difference
-            int pid_out = test.pid_task(ideal_sheath, measured_sheath);
-            sheath = measured_sheath + pid_out;
+            int pid_out = test.pid_task(ideal_sheath, measured_sheath);  //feeding measured sheath and ideal sheath into pid to find the adjustment
+            sheath = measured_sheath + pid_out;   //moving sheath based on pid difference
             cout << "new sheath is: " << sheath << endl;
         }
         
         
     }
     
-    //straight shift phase
+    //Once we get to 3550 rpm, we enter the straight shift phase where we want to keep rpm constant
     while(1){
         rpm = getRPM();
         throttle = getThrottle();
         if(throttle == 100 && (rpm) > 3550){
-            if(sheath > MIN_SHEATH){
+            if(sheath > MIN_SHEATH){ //makes sure sheath position doesnt exceed kill switch limit
                 cout << "up shift" << endl;
                 motor(100);
-                sheath = sheath -  SHIFT_DISPLACEMENT;
+                sheath = sheath -  SHIFT_DISPLACEMENT; //used for modelling
                 cout << "new sheath is: " << sheath << endl;
             }
             
@@ -69,7 +66,7 @@ int main(void){
             cout << "ideal sheath: " << ideal_sheath << " measured sheath:  " << measured_sheath << endl;
             //moving sheath based on pid difference
             int pid_out = test.pid_task(ideal_sheath, measured_sheath);
-            sheath = measured_sheath + pid_out;
+            sheath = measured_sheath + pid_out; //used for modelling
             cout << "new sheath is: " << sheath << endl;
             
         }
@@ -78,7 +75,7 @@ int main(void){
             
             cout << "down shift " << endl;
             motor(-100);
-            sheath = sheath + SHIFT_DISPLACEMENT;
+            sheath = sheath + SHIFT_DISPLACEMENT; //used for modelling
             cout << "new sheath is: " << sheath << endl;
         }
         

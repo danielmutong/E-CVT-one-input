@@ -27,6 +27,9 @@ private:
     float output;
 public:
     
+    /*
+     Constructor to initialize constants required for PID controller
+     */
     pid(){
         KP = 1;
         KI = 0;
@@ -34,6 +37,9 @@ public:
         error_prior = 0; integral_prior = 0; bias = 0; iteration_time = 500; error = 0; integral = 0; derivative = 0; output = 0;
     };
     
+    /*
+     This method calculates and returns the necessary adjustment based on the PID controller
+     */
     int pid_task(float desired_value, float actual_value);
 
 };
