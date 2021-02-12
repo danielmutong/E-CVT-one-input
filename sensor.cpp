@@ -33,3 +33,16 @@ int getThrottle(){
   cin >> throttle;
   return throttle;
 }
+
+bool limitSwitch(int disp){
+    int limit = 1;
+    if (disp < limit){
+        return true;
+    }
+    else
+        return false;
+}
+
+void shutdown(){
+    cout << "limit exceeded, shut down" << endl;
+}

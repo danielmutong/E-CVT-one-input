@@ -33,7 +33,15 @@ float getSheath();
  */
 int getThrottle();
 
+/*
+ This function is used to check if limit switch exceeded
+ */
+bool limitSwitch(int);
 
+/*
+ This function is used to shut down system if limit switch exceeded
+ */
+void shutdown();
 
 
 #endif /* sensor_hpp */

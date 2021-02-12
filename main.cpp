@@ -29,6 +29,9 @@ int main(void){
     
     //engagement phase
     while(rpm < 3550){
+        if(limitSwitch(getSheath()) == TRUE)
+            shutdown();
+        
         rpm = getRPM();
         throttle = getThrottle();
         //if full throttle
@@ -47,6 +50,9 @@ int main(void){
     
     //Once we get to 3550 rpm, we enter the straight shift phase where we want to keep rpm constant
     while(1){
+        if(limitSwitch(getSheath()) == TRUE)
+            shutdown();
+        
         rpm = getRPM();
         throttle = getThrottle();
         if(throttle == 100 && (rpm) > 3550){
