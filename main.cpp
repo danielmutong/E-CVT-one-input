@@ -45,7 +45,6 @@ int main(void){
             cout << "new sheath is: " << sheath << endl;
         }
         
-        
     }
     
     //Once we get to 3550 rpm, we enter the straight shift phase where we want to keep rpm constant
