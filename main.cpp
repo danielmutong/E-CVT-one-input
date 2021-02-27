@@ -27,9 +27,10 @@ int main(void){
     int throttle = 0;
     float sheath = MAX_SHEATH;
     
+    a.configure_map(); //pick which map to use
     //engagement phase
     while(rpm < 3550){
-        if(limitSwitch(getSheath()) == TRUE)
+        if(limitSwitch(getSheath()) == true)
             shutdown();
         
         rpm = getRPM();
@@ -49,7 +50,7 @@ int main(void){
     
     //Once we get to 3550 rpm, we enter the straight shift phase where we want to keep rpm constant
     while(1){
-        if(limitSwitch(getSheath()) == TRUE)
+        if(limitSwitch(getSheath()) == true)
             shutdown();
         
         rpm = getRPM();

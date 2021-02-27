@@ -11,6 +11,8 @@
 
 #include <iostream>
 #include "Table.h"
+
+
 class LookUp {
 private:
     float output;
@@ -24,6 +26,7 @@ public:
      This method finds and returns the value associated with the key in a map
      */
     int findkey(float key);
+    void configure_map(void);
 };
 
 #endif /* LookUp_hpp */
